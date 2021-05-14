@@ -19,7 +19,6 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onPlayClicked(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "GameViewSegue", sender:self)
     }
     
     @IBAction func onTopTenClicked(_ sender: UIButton) {
