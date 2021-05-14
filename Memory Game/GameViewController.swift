@@ -6,14 +6,17 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
 
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var moveCounterLabel: UILabel!
     
     var model=CardModel()
     var cardArray=[Card]()
     
+    var moveCounter=10
     var firstFlippedCardIndex:IndexPath?
     
     var timer:Timer?
-    var milliseconds:Float=1000*30//30 seconds
+    var milliseconds:Float=0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +26,7 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
         collectionView.dataSource=self
         
         timer=Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerElapsed), userInfo: nil, repeats: true)
+        moveCounterLabel.text="Moves: \(moveCounter)"
 
         RunLoop.main.add(timer!, forMode: .common)
     }
@@ -30,27 +34,21 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
-        return cardArray.count
+        return 1
     }
     
     @objc func timerElapsed(){
-        milliseconds-=1
+        milliseconds+=1
         
         let seconds=String(format: "%.2f",milliseconds/1000)
         
         timerLabel.text=seconds
-        
-        if milliseconds<=0{
-            timer?.invalidate()
-            
-            timerLabel.textColor=UIColor.red
-            
-            checkGameEnded()
-        }
+
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! CardCollectionViewCell
         
         let card=cardArray[indexPath.row]
@@ -60,13 +58,13 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if milliseconds<=0{
+        if moveCounter<=0{
             return
         }
         let cell=collectionView.cellForItem(at: indexPath)as! CardCollectionViewCell
         
         let card=cardArray[indexPath.row]
-        
+
         if card.isFlipped==false&&card.isMatched==false{
             
             card.isFlipped=true
@@ -87,7 +85,7 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
         
         let cardOne=cardArray[firstFlippedCardIndex!.row]
         let cardTwo=cardArray[secondFlippedCardIndex.row]
-        
+
         if cardOne.imageName==cardTwo.imageName{
             cardOne.isMatched=true
             cardTwo.isMatched=true
@@ -98,6 +96,10 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
             checkGameEnded()
 
         }else{
+            moveCounter-=1
+            moveCounterLabel.text="Moves: \(moveCounter)"
+            checkGameEnded()
+
             cardOne.isFlipped=false
             cardTwo.isFlipped=false
             
@@ -129,18 +131,21 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
         var message=""
         
         if isWon==true{
-            if milliseconds>0{
+            if moveCounter>0{
                 timer?.invalidate()
             }
             title="Congratulations!"
             message="You won"
         }else{
             
-            if milliseconds>0{
+            if moveCounter>0{
                 return
             }
+            timer?.invalidate()
+            
             title="Game Over!"
             message="You lost"
+            firstFlippedCardIndex=nil
 
         }
         showAlret(title,message)

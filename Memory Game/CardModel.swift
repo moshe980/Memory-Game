@@ -13,7 +13,7 @@ class CardModel{
         var generatedCardsArray=[Card]()
         
         while generatedNumbersarray.count<8 {
-            let randomNumber=arc4random_uniform(13)+1
+            let randomNumber=arc4random_uniform(8)+1
             
             if generatedNumbersarray.contains(Int(randomNumber))==false{
                 print(randomNumber)
