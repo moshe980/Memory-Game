@@ -20,43 +20,53 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueBoardGame" translatesAutoresizingMaskIntoConstraints="NO" id="PNO-90-jZC">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="8Zk-Lo-44m">
-                                <rect key="frame" x="0.0" y="44" width="428" height="404"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="8Zk-Lo-44m">
+                                <rect key="frame" x="0.0" y="44" width="428" height="392"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memory Game" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmK-T1-MfF">
-                                        <rect key="frame" x="0.0" y="0.0" width="428" height="68"/>
+                                        <rect key="frame" x="52.666666666666657" y="0.0" width="323" height="68"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="48"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAO-NL-Xnk">
-                                        <rect key="frame" x="0.0" y="168" width="428" height="68"/>
+                                        <rect key="frame" x="120.66666666666669" y="168" width="187" height="56"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="46"/>
+                                        <inset key="contentEdgeInsets" minX="50" minY="0.0" maxX="50" maxY="0.0"/>
                                         <state key="normal" title="Play">
                                             <color key="titleColor" systemColor="labelColor"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onPlayClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7zd-cs-t1p"/>
-                                            <segue destination="0uo-ex-KtX" kind="modal" id="fq8-IP-W6f"/>
+                                            <segue destination="0uo-ex-KtX" kind="modal" id="Dkb-XB-ruH"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWt-i4-dLm">
-                                        <rect key="frame" x="0.0" y="336" width="428" height="68"/>
+                                        <rect key="frame" x="95" y="324" width="238" height="68"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="46"/>
                                         <state key="normal" title="Top 10">
                                             <color key="titleColor" systemColor="labelColor"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onTopTenClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OAz-3n-Kpz"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="iAO-NL-Xnk" secondAttribute="trailing" id="53P-uM-mwd"/>
-                                    <constraint firstItem="iAO-NL-Xnk" firstAttribute="centerX" secondItem="8Zk-Lo-44m" secondAttribute="centerX" id="RNl-BQ-RuD"/>
-                                    <constraint firstItem="iAO-NL-Xnk" firstAttribute="leading" secondItem="8Zk-Lo-44m" secondAttribute="leading" id="cXr-nJ-zVC"/>
+                                    <constraint firstItem="ZWt-i4-dLm" firstAttribute="width" secondItem="iAO-NL-Xnk" secondAttribute="width" multiplier="1.27273" id="pH9-3r-L9a"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -96,12 +106,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="838"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5NT-3Z-f50">
-                                        <rect key="frame" x="177.33333333333334" y="0.0" width="73.666666666666657" height="100"/>
+                                        <rect key="frame" x="174" y="0.0" width="80.333333333333314" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="dSW-7M-6fg"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qnc-vE-t3t">
@@ -139,12 +149,12 @@
                                         </cells>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moves" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tef-LD-Eq9">
-                                        <rect key="frame" x="170" y="738" width="88.333333333333314" height="100"/>
+                                        <rect key="frame" x="166.66666666666666" y="738" width="94.999999999999972" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="3RW-yK-y2i"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="31"/>
-                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="31"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
