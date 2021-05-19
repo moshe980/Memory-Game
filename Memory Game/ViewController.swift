@@ -15,14 +15,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func onPlayClicked(_ sender: UIButton) {
     }
     
     @IBAction func onTopTenClicked(_ sender: UIButton) {
-        print("Top 10")
 
     }
 }

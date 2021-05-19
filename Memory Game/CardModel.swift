@@ -12,11 +12,10 @@ class CardModel{
         var generatedNumbersarray=[Int]()
         var generatedCardsArray=[Card]()
         
-        while generatedNumbersarray.count<8 {
-            let randomNumber=arc4random_uniform(8)+1
-            
+        while generatedNumbersarray.count<10 {
+            let randomNumber=arc4random_uniform(10)+1
+            print(randomNumber)
             if generatedNumbersarray.contains(Int(randomNumber))==false{
-                print(randomNumber)
                 generatedNumbersarray.append(Int(randomNumber))
                 let cardOne = Card()
                 cardOne.imageName = "card\(randomNumber)"

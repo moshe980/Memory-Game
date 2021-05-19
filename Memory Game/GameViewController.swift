@@ -1,8 +1,7 @@
 import UIKit
+import CoreLocation
 
 class GameViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-
-    
 
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -10,8 +9,10 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
     
     var model=CardModel()
     var cardArray=[Card]()
+    var locationManager:CLLocationManager!
+    var userName:String!
     
-    var moveCounter=10
+    var moveCounter=20
     var firstFlippedCardIndex:IndexPath?
     
     var timer:Timer?
@@ -24,6 +25,10 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
         
         collectionView.delegate=self
         collectionView.dataSource=self
+        
+        locationManager=CLLocationManager()
+        locationManager.delegate=self
+
         
         timer=Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerElapsed), userInfo: nil, repeats: true)
         moveCounterLabel.text="Moves: \(moveCounter)"
@@ -135,7 +140,9 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
                 timer?.invalidate()
             }
             title="Congratulations!"
-            message="You won"
+            message="You won!!!\n Enter your name:"
+            showTextViewAlret(title,message)
+
         }else{
             
             if moveCounter>0{
@@ -146,17 +153,59 @@ class GameViewController: UIViewController,UICollectionViewDelegate,UICollection
             title="Game Over!"
             message="You lost"
             firstFlippedCardIndex=nil
-
+            showAlret(title,message)
         }
-        showAlret(title,message)
     }
     
     func showAlret(_ title:String,_ message:String){
         let alret=UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let alretAction=UIAlertAction(title: "Ok", style: .default, handler: nil)
-        
-        alret.addAction(alretAction)
+ 
+        alret.addAction(UIAlertAction(title: "Ok", style: .default, handler:{(_) in
+            self.dismiss(animated: true, completion: nil)
+        } ))
+
         present(alret, animated: true, completion: nil)
     }
+    func showTextViewAlret(_ title:String,_ message:String){
+        let textAlretView=UIAlertController(title: title, message: message, preferredStyle: .alert)
+        textAlretView.addTextField(configurationHandler: nil)
+        textAlretView.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (_) in
+        self.userName = textAlretView.textFields![0].text
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestLocation()
+
+
+
+        }))
+        
+        present(textAlretView, animated: true, completion: nil)
+
+    }
+
+}
+extension GameViewController:CLLocationManagerDelegate{
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location=locations.last{
+            locationManager.stopUpdatingLocation()
+            let lat=location.coordinate.latitude
+            let lon=location.coordinate.longitude
+            
+            ModelManager.instance.saveUser(user: User(name:userName, score: Double(self.timerLabel.text!)!,lat: lat,lon: lon))
+            
+            
+        }
+        self.dismiss(animated: true, completion: nil)
+
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationManager.stopUpdatingLocation()
+        print("location Error:\(Error.Type.self)")
+        print(CLLocationManager.locationServicesEnabled())
+        self.dismiss(animated: true, completion: nil)
+
+    }
+    
 }
 
