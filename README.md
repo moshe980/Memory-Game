@@ -1,5 +1,5 @@
 # Memory Game
 
-![targil1](https://user-images.githubusercontent.com/57193257/118888199-0502a800-b904-11eb-9e11-597e3604db36.PNG)
+![targil1](https://user-images.githubusercontent.com/57193257/118888512-6fb3e380-b904-11eb-8dff-8a8d4f5a46cb.PNG)
+![targil2](https://user-images.githubusercontent.com/57193257/118888518-70e51080-b904-11eb-8652-8bc9accee4cc.PNG)
 
-![targil2](https://user-images.githubusercontent.com/57193257/118888371-3da28180-b904-11eb-84c8-857b47f35c09.PNG)
